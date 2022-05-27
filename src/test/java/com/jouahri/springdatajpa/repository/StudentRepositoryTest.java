@@ -1,5 +1,6 @@
 package com.jouahri.springdatajpa.repository;
 
+import com.jouahri.springdatajpa.entity.Guardian;
 import com.jouahri.springdatajpa.entity.Student;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +23,9 @@ class StudentRepositoryTest {
                 .emailId("zakaria.jouahri@outlook.de")
                 .firstName("Zakaria")
                 .lastName("Jouahri")
-                .guardianName("Outmane Jouahri")
-                .guardianEmail("outmane.jouahri@outlook.de")
-                .guardianMobile("012 345678")
+                //.guardianName("Outmane Jouahri")
+                //.guardianEmail("outmane.jouahri@outlook.de")
+                //.guardianMobile("012 345678")
                 .build();
 
         // when
@@ -43,5 +44,28 @@ class StudentRepositoryTest {
 
         // then
         System.out.println("studentList = " + studentList);
+    }
+
+    @Test
+    public void saveStudentWithGuardian() {
+        // given
+        Guardian guardian = Guardian.builder()
+                .name("Outmane Jouahri")
+                .email("outmane.jouahri@outlook.de")
+                .mobile("012 345678")
+                .build();
+
+        Student student = Student.builder()
+                .emailId("sadio.max@outlook.de")
+                .firstName("Sadio")
+                .lastName("Max")
+                .guardian(guardian)
+                .build();
+
+        // when
+        studentRepository.save(student);
+
+        // then
+        System.out.println("the object is successfully created");
     }
 }
