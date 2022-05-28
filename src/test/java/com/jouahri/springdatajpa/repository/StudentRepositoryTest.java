@@ -2,6 +2,7 @@ package com.jouahri.springdatajpa.repository;
 
 import com.jouahri.springdatajpa.entity.Guardian;
 import com.jouahri.springdatajpa.entity.Student;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -177,5 +178,32 @@ class StudentRepositoryTest {
 
         // then
         System.out.println("students = " + students);
+    }
+
+
+    @Test
+    public void printStudent_ByUsing_getStudentByEmailAddress() {
+        // given
+        String emailAddress = "zakaria.jouahri@outlook.de";
+
+        // when
+        Student student = studentRepository.getStudentByEmailAddress(emailAddress);
+
+        // then
+        System.out.println("student = " + student);
+    }
+
+    @Test
+    public void printStudent_ByUsing_getStudentFirstNameByEmailAddress() {
+        // given
+        String emailAddress = "zakaria.jouahri@outlook.de";
+        String expectedValue = "Zakaria";
+
+        // when
+        String actualValue = studentRepository.getStudentFirstNameByEmailAddress(emailAddress);
+
+        // then
+        System.out.println("student = " + actualValue);
+        Assertions.assertEquals(expectedValue, actualValue);
     }
 }

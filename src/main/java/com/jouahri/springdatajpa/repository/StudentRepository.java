@@ -3,6 +3,7 @@ package com.jouahri.springdatajpa.repository;
 import com.jouahri.springdatajpa.entity.Guardian;
 import com.jouahri.springdatajpa.entity.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -34,4 +35,12 @@ public interface StudentRepository extends JpaRepository <Student, Long> {
     List<Student> findByLastNameIsStartingWith(String firstWord);
 
     List<Student> findByLastNameContaining(String name);
+
+    // JPQL
+    @Query("select s from Student as s where s.emailId = ?1")
+    Student getStudentByEmailAddress(String email);
+
+    // JPQL
+    @Query("select s.firstName from Student as s where s.emailId = ?1")
+    String getStudentFirstNameByEmailAddress(String email);
 }
