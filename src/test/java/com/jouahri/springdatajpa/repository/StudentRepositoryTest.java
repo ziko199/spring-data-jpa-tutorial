@@ -252,4 +252,18 @@ class StudentRepositoryTest {
         System.out.println("student = " + actualValue);
         assertEquals(expectedValue, actualValue);
     }
+
+    @Test
+    public void printStudent_ByUsing_getStudentFirstNameByEmailAddressNativeWithNamedParam() {
+        // given
+        String emailAddress = "zakaria.jouahri@outlook.de";
+        String expectedValue = "Zakaria";
+
+        // when
+        String actualValue = studentRepository.getStudentFirstNameByEmailAddressNativeWithNamedParam(emailAddress);
+
+        // then
+        System.out.println("student = " + actualValue);
+        assertEquals(expectedValue, actualValue);
+    }
 }

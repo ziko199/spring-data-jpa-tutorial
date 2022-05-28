@@ -4,6 +4,7 @@ import com.jouahri.springdatajpa.entity.Guardian;
 import com.jouahri.springdatajpa.entity.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -51,11 +52,16 @@ public interface StudentRepository extends JpaRepository <Student, Long> {
     )
     Student getStudentByEmailAddressNative(String email);
 
-    // JPQL
     @Query(
             value = "SELECT s.first_name FROM tbl_student AS s WHERE s.email_address = ?1",
             nativeQuery = true
     )
     String getStudentFirstNameByEmailAddressNative(String email);
 
+    // Native Query with Named Param
+    @Query(
+            value = "SELECT s.first_name FROM tbl_student AS s WHERE s.email_address = :emailAddress",
+            nativeQuery = true
+    )
+    String getStudentFirstNameByEmailAddressNativeWithNamedParam(@Param("emailAddress") String email);
 }
