@@ -2,12 +2,13 @@ package com.jouahri.springdatajpa.repository;
 
 import com.jouahri.springdatajpa.entity.Guardian;
 import com.jouahri.springdatajpa.entity.Student;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class StudentRepositoryTest {
@@ -204,6 +205,51 @@ class StudentRepositoryTest {
 
         // then
         System.out.println("student = " + actualValue);
-        Assertions.assertEquals(expectedValue, actualValue);
+        assertEquals(expectedValue, actualValue);
+    }
+
+    @Test
+    public void printStudent_ByUsing_getStudentByEmailAddressNative() {
+        // given
+        String emailAddress = "zakaria.jouahri@outlook.de";
+        Guardian guardian = Guardian.builder()
+                .name("Outmane Jouahri")
+                .email("outmane.jouahri@outlook.de")
+                .mobile("012 345678")
+                .build();
+        Student expectedStudent = Student.builder()
+                .emailId("zakaria.jouahri@outlook.de")
+                .firstName("Zakaria")
+                .lastName("Jouahri")
+                .guardian(guardian)
+                .build();
+
+        // when
+        Student actualStudent = studentRepository.getStudentByEmailAddressNative(emailAddress);
+
+        // then
+        System.out.println("student = " + actualStudent);
+        assertAll(
+                () -> assertEquals(expectedStudent.getEmailId(), actualStudent.getEmailId()),
+                () -> assertEquals(expectedStudent.getFirstName(), actualStudent.getFirstName()),
+                () -> assertEquals(expectedStudent.getLastName(), actualStudent.getLastName()),
+                () -> assertEquals(expectedStudent.getGuardian().getName(), actualStudent.getGuardian().getName()),
+                () -> assertEquals(expectedStudent.getGuardian().getEmail(), actualStudent.getGuardian().getEmail()),
+                () -> assertEquals(expectedStudent.getGuardian().getMobile(), actualStudent.getGuardian().getMobile())
+        );
+    }
+
+    @Test
+    public void printStudent_ByUsing_getStudentFirstNameByEmailAddressNative() {
+        // given
+        String emailAddress = "zakaria.jouahri@outlook.de";
+        String expectedValue = "Zakaria";
+
+        // when
+        String actualValue = studentRepository.getStudentFirstNameByEmailAddressNative(emailAddress);
+
+        // then
+        System.out.println("student = " + actualValue);
+        assertEquals(expectedValue, actualValue);
     }
 }
