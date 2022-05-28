@@ -8,8 +8,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
 class StudentRepositoryTest {
 
@@ -40,10 +38,10 @@ class StudentRepositoryTest {
         // given
 
         // when
-        List<Student> studentList = studentRepository.findAll();
+        List<Student> students = studentRepository.findAll();
 
         // then
-        System.out.println("studentList = " + studentList);
+        System.out.println("students = " + students);
     }
 
     @Test
@@ -67,5 +65,117 @@ class StudentRepositoryTest {
 
         // then
         System.out.println("the object is successfully created");
+    }
+
+    @Test
+    public void printStudentByFirstName() {
+        // given
+        String firstName = "Zakaria";
+
+        // when
+        List<Student> students = studentRepository.findByFirstName(firstName);
+
+        // then
+        System.out.println("students = " + students);
+    }
+
+    @Test
+    public void printStudentByLastName() {
+        // given
+        String lastName = "Jouahri";
+
+        // when
+        List<Student> students = studentRepository.findByLastName(lastName);
+
+        // then
+        System.out.println("students = " + students);
+    }
+
+    @Test
+    public void printStudentByStudentId() {
+        // given
+        Long studentId = 10L;
+
+        // when
+        List<Student> students = studentRepository.findByStudentId(studentId);
+
+        // then
+        System.out.println("students = " + students);
+    }
+
+    @Test
+    public void printStudentByGuardian() {
+        // given
+        Guardian guardian = Guardian.builder()
+                .name("Outmane Jouahri")
+                .email("outmane.jouahri@outlook.de")
+                .mobile("012 345678")
+                .build();
+
+        // when
+        List<Student> students = studentRepository.findByGuardian(guardian);
+
+        // then
+        System.out.println("students = " + students);
+    }
+
+    @Test
+    public void printStudentByGuardianName() {
+        // given
+        String guardianName = "Outmane Jouahri";
+
+        // when
+        List<Student> students = studentRepository.findByGuardianName(guardianName);
+
+        // then
+        System.out.println("students = " + students);
+    }
+
+    @Test
+    public void printStudentByLastNameNotNull() {
+        // given
+
+        // when
+        List<Student> students = studentRepository.findByLastNameNotNull();
+
+        // then
+        System.out.println("students = " + students);
+    }
+
+    @Test
+    public void printStudentByFirstNameAndLastName() {
+        // given
+        String firstName = "Zakaria";
+        String lastName = "Jouahri";
+
+        // when
+        List<Student> students = studentRepository.findByFirstNameAndLastName(firstName, lastName);
+
+        // then
+        System.out.println("students = " + students);
+    }
+
+    @Test
+    public void printStudentByLastNameIsStartingWith() {
+        // given
+        String firstWord = "J";
+
+        // when
+        List<Student> students = studentRepository.findByLastNameIsStartingWith(firstWord);
+
+        // then
+        System.out.println("students = " + students);
+    }
+
+    @Test
+    public void printStudentByLastNameContaining() {
+        // given
+        String name = "ua";
+
+        // when
+        List<Student> students = studentRepository.findByLastNameContaining(name);
+
+        // then
+        System.out.println("students = " + students);
     }
 }
