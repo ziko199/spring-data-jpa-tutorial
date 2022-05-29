@@ -33,7 +33,7 @@ class CourseMaterialRepositoryTest {
         courseMaterialRepository.save(courseMaterial);
 
         // then
-        System.out.println("the object is successfully updated");
+        System.out.println("the object is successfully saved");
     }
 
     @Test
@@ -45,5 +45,25 @@ class CourseMaterialRepositoryTest {
 
         // then
         System.out.println("courseMaterials = " + courseMaterials);
+    }
+
+    @Test
+    public void saveCourseMaterialWithOptionalIsFalse() {
+        // given
+        Course course = Course.builder()
+                .title("Networking")
+                .credit(6)
+                .build();
+
+        CourseMaterial courseMaterial = CourseMaterial.builder()
+                .url("www.networking.de")
+                .course(course)
+                .build();
+
+        // when
+        courseMaterialRepository.save(courseMaterial);
+
+        // then
+        System.out.println("the object is successfully saved");
     }
 }
