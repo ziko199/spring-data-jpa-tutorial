@@ -266,4 +266,17 @@ class StudentRepositoryTest {
         System.out.println("student = " + actualValue);
         assertEquals(expectedValue, actualValue);
     }
+
+    @Test
+    public void updateStudentFirstNameByEmailIdTest() {
+        // given
+        String emailId = "sadio.max@outlook.de";
+        String firstName = "Sadio";
+
+        // when
+        studentRepository.updateStudentFirstNameByEmailId(firstName, emailId);
+
+        // then
+        System.out.println("the object is successfully updated");
+    }
 }

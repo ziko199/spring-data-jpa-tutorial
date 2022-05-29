@@ -3,9 +3,11 @@ package com.jouahri.springdatajpa.repository;
 import com.jouahri.springdatajpa.entity.Guardian;
 import com.jouahri.springdatajpa.entity.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -64,4 +66,12 @@ public interface StudentRepository extends JpaRepository <Student, Long> {
             nativeQuery = true
     )
     String getStudentFirstNameByEmailAddressNativeWithNamedParam(@Param("emailAddress") String email);
+
+    @Modifying
+    @Transactional
+    @Query(
+            value = "UPDATE tbl_student SET first_name = ?1 WHERE email_address = ?2",
+            nativeQuery = true
+    )
+    void updateStudentFirstNameByEmailId(String firstName, String emailId);
 }
