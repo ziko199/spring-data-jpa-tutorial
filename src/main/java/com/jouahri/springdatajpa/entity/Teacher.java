@@ -28,14 +28,14 @@ public class Teacher {
     private String firstName;
     private String lastName;
 
-    @OneToMany(
-            fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL
-    )
-    @JoinColumn(
-            name = "teacher_id",
-            referencedColumnName = "teacherId"
-    )
-    private Set<Course> courses;
+//    @OneToMany(
+//            fetch = FetchType.LAZY,
+//            cascade = CascadeType.ALL
+//    )
+//    @JoinColumn(
+//            name = "teacher_id",
+//            referencedColumnName = "teacherId"
+//    )
+//    private Set<Course> courses;
 
 }

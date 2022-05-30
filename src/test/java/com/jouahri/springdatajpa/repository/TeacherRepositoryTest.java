@@ -31,7 +31,7 @@ class TeacherRepositoryTest {
         Teacher teacher = Teacher.builder()
                 .firstName("Mohammed")
                 .lastName("Lehmann")
-                .courses(Set.of(pythonCourse, MathCourse))
+                //.courses(Set.of(pythonCourse, MathCourse))
                 .build();
 
         // when
